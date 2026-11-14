@@ -4,9 +4,14 @@ Develop a Java node extension for KNIME Analytics Platform that creates SAP HANA
 
 ## References
 
+### Webpages
+- SAP documents JWT user authentication for HANA Data Services [here](https://help.sap.com/docs/SAP_DATA_SERVICES/af6d8e979d0f40c49175007e486257f0/8d553b3a0aca45beb9f6dfb68185ebaa.html): leave the User Name field empty and put the encoded JWT in the Password field.
+- Consult SAP HANA Platform's [Single Sign-On Using JSON Web Tokens](https://help.sap.com/docs/SAP_HANA_PLATFORM/b3ee5778bc2e4a089d3299b82ec762a7/4b3dc4d4b5514dbd9d45cee7bc167c5a.html) documentation for HANA JWT SSO behavior.
+
+### Local code reference material
+- `reference/` is locally ignored and is not part of this repository's deliverable. Use it as read-only reference material; do not modify or add its contents to commits.
 - `reference/knime-database-analytics-platform-5.12.0/` is the database implementation reference. For an optional JWT Credentials input port, inspect the current Microsoft SQL Server connector under `org.knime.database.extensions/src/org/knime/database/extension/mssql/node/connector/`.
 - `reference/knime-examples-analytics-platform-5.12.0/` contains example node implementations; `org.knime.examples.numberformatter` is a minimal Java node example.
-- `reference/` is locally ignored and is not part of this repository's deliverable. Use it as read-only reference material; do not modify or add its contents to commits.
 
 ## Connector requirements
 
