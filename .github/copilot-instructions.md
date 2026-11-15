@@ -9,12 +9,12 @@ Develop a Java node extension for KNIME Analytics Platform that creates SAP HANA
 - SAP documents JWT user authentication for HANA Data Services [here](https://help.sap.com/docs/SAP_DATA_SERVICES/af6d8e979d0f40c49175007e486257f0/8d553b3a0aca45beb9f6dfb68185ebaa.html): leave the User Name field empty and put the encoded JWT in the Password field.
 - Consult SAP HANA Platform's [Single Sign-On Using JSON Web Tokens](https://help.sap.com/docs/SAP_HANA_PLATFORM/b3ee5778bc2e4a089d3299b82ec762a7/4b3dc4d4b5514dbd9d45cee7bc167c5a.html) documentation for HANA JWT SSO behavior.
 
-### Local code reference material
-- `reference/` is locally ignored and is not part of this repository's deliverable. Use it as read-only reference material; do not modify or add its contents to commits.
-- `reference/noding_guidelines.pdf` contains local KNIME node development guidelines. Consult it alongside KNIME's online extension contribution guidance.
-- `reference/knime-database-analytics-platform-5.12.0/` is the database implementation reference. For an optional JWT Credentials input port, inspect the current Microsoft SQL Server connector under `org.knime.database.extensions/src/org/knime/database/extension/mssql/node/connector/`.
-- `reference/knime-examples-analytics-platform-5.12.0/` contains example node implementations; `org.knime.examples.numberformatter` is a minimal Java node example.
-- `reference/knime-sdk-setup-analytics-platform-5.12.0/` contains the SDK setup instructions and Eclipse target platform definitions for KNIME Analytics Platform 5.12.0. For this database connector, select `KNIME-AP-complete.target` in Eclipse; the complete target includes more KNIME extensions and is the safer fit.
+### Local reference material
+- The reference material is in the sibling directory `../knime-sap-hana-connector-reference/`, outside this repository. Use it read-only; do not modify it or add its contents to commits.
+- `../knime-sap-hana-connector-reference/noding_guidelines.pdf` contains KNIME node development guidelines. Consult it alongside KNIME's online extension contribution guidance.
+- `../knime-sap-hana-connector-reference/knime-database-analytics-platform-5.12.0/` is the database implementation reference. For an optional JWT Credentials input port, inspect the current Microsoft SQL Server connector under `org.knime.database.extensions/src/org/knime/database/extension/mssql/node/connector/`.
+- `../knime-sap-hana-connector-reference/knime-examples-analytics-platform-5.12.0/` contains example node implementations; `org.knime.examples.numberformatter` is a minimal Java node example.
+- `../knime-sap-hana-connector-reference/knime-sdk-setup-analytics-platform-5.12.0/` contains the SDK setup instructions and Eclipse target platform definitions for KNIME Analytics Platform 5.12.0. For this database connector, select `KNIME-AP-complete.target` in Eclipse; the complete target includes more KNIME extensions and is the safer fit.
 
 ## Connector requirements
 
