@@ -8,7 +8,9 @@ import org.knime.credentials.base.CredentialPortObjectSpec;
 import org.knime.database.node.connector.DBConnectorNodeSettingsUtils.DBDialectChoicesProvider;
 import org.knime.database.node.connector.DBConnectorNodeSettingsUtils.DBDriverChoicesProvider;
 import org.knime.database.node.connector.server.UnauthenticatedServerDBConnectorNodeSettings;
+import org.knime.node.parameters.Advanced;
 import org.knime.node.parameters.NodeParametersInput;
+import org.knime.node.parameters.Widget;
 import org.knime.node.parameters.layout.Layout;
 import org.knime.node.parameters.modification.Modification;
 import org.knime.node.parameters.updates.Effect;
@@ -23,7 +25,8 @@ import org.knime.node.parameters.widget.message.TextMessage;
 
 @SuppressWarnings("restriction")
 @Modification({SAPHANADBConnectorNodeSettings.ConnectorModification.class,
-    SAPHANADBConnectorNodeSettings.DescriptionModification.class})
+    SAPHANADBConnectorNodeSettings.DescriptionModification.class,
+    SAPHANADBConnectorNodeSettings.ServerLayoutModification.class})
 public final class SAPHANADBConnectorNodeSettings extends UnauthenticatedServerDBConnectorNodeSettings {
 
     private static final int DEFAULT_PORT = 30015;
@@ -75,6 +78,24 @@ public final class SAPHANADBConnectorNodeSettings extends UnauthenticatedServerD
         @Override
         protected int getDefaultPort() {
             return DEFAULT_PORT;
+        }
+    }
+
+    static final class ServerLayoutModification implements Modification.Modifier {
+        @Override
+        public void modify(final Modification.WidgetGroupModifier group) {
+            group.find(DatabaseNameRef.class).removeAnnotation(Widget.class);
+            group.find(getPortReference()).removeAnnotation(Advanced.class);
+        }
+
+        @SuppressWarnings("unchecked")
+        private static Class<? extends Modification.Reference> getPortReference() {
+            try {
+                return (Class<? extends Modification.Reference>)Class
+                    .forName("org.knime.database.node.connector.server.UnauthenticatedServerDBConnectorNodeSettings$PortRef");
+            } catch (ClassNotFoundException ex) {
+                throw new IllegalStateException("Unable to locate SAP HANA port widget reference.", ex);
+            }
         }
     }
 
