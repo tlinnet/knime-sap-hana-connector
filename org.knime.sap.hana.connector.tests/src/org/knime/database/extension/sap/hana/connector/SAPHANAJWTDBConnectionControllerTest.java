@@ -17,7 +17,7 @@ class SAPHANAJWTDBConnectionControllerTest {
         properties.setProperty("user", "configured-user");
         properties.setProperty("PASSWORD", "configured-password");
 
-        SAPHANAJWTDBConnectionController.applyJwtCredentials(properties, "encoded.jwt.token");
+        JWTJdbcProperties.apply(properties, "encoded.jwt.token");
 
         assertEquals("", properties.getProperty("user"));
         assertEquals("encoded.jwt.token", properties.getProperty("password"));
@@ -26,7 +26,7 @@ class SAPHANAJWTDBConnectionControllerTest {
     @Test
     void missingTokenIsRejected() {
         assertThrows(SQLException.class,
-            () -> SAPHANAJWTDBConnectionController.applyJwtCredentials(new Properties(), " "));
+            () -> JWTJdbcProperties.apply(new Properties(), " "));
     }
 
     @Test
@@ -39,7 +39,7 @@ class SAPHANAJWTDBConnectionControllerTest {
         properties.setProperty("encrypt", "true");
 
         final Properties urlProperties =
-            SAPHANAJWTDBConnectionController.copyPropertiesWithoutCredentials(properties);
+            JWTJdbcProperties.withoutCredentials(properties);
 
         assertFalse(urlProperties.containsKey("user"));
         assertFalse(urlProperties.containsKey("password"));

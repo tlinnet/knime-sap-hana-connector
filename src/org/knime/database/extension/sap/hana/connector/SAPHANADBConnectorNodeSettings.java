@@ -5,7 +5,6 @@ import java.util.List;
 
 import org.knime.core.node.InvalidSettingsException;
 import org.knime.credentials.base.CredentialPortObjectSpec;
-import org.knime.database.extension.sap.hana.SAPHANA;
 import org.knime.database.node.connector.DBConnectorNodeSettingsUtils.DBDialectChoicesProvider;
 import org.knime.database.node.connector.DBConnectorNodeSettingsUtils.DBDriverChoicesProvider;
 import org.knime.database.node.connector.server.UnauthenticatedServerDBConnectorNodeSettings;
@@ -30,7 +29,7 @@ public final class SAPHANADBConnectorNodeSettings extends UnauthenticatedServerD
     private static final int DEFAULT_PORT = 30015;
 
     public SAPHANADBConnectorNodeSettings() {
-        super(SAPHANA.DB_TYPE, DEFAULT_PORT);
+        super(SAPHANAType.get(), DEFAULT_PORT);
     }
 
     static final class ConnectorModification extends ChoicesProviderModification {
@@ -57,20 +56,20 @@ public final class SAPHANADBConnectorNodeSettings extends UnauthenticatedServerD
 
     static final class SAPHANADBDialectChoicesProvider extends DBDialectChoicesProvider {
         SAPHANADBDialectChoicesProvider() {
-            super(SAPHANA.DB_TYPE, true);
+            super(SAPHANAType.get(), true);
         }
     }
 
     static final class SAPHANADBDriverChoicesProvider extends DBDriverChoicesProvider {
         SAPHANADBDriverChoicesProvider() {
-            super(SAPHANA.DB_TYPE);
+            super(SAPHANAType.get());
         }
     }
 
     static final class DescriptionModification extends ServerSettingsDescriptionModification {
         @Override
         protected String getDBTypeName() {
-            return SAPHANA.DB_TYPE.getName();
+            return SAPHANAType.get().getName();
         }
 
         @Override

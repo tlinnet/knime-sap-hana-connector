@@ -44,7 +44,7 @@ final class SAPHANAJWTDBConnectionController extends UrlDBConnectionController {
         final Properties driverProperties;
         if (attributeValues.get(ATTRIBUTE_APPEND_JDBC_PARAMETER_TO_URL)) {
             jdbcUrl = appendPropertiesToURL(attributeValues, getJdbcUrl(),
-                copyPropertiesWithoutCredentials(preparedProperties));
+                JWTJdbcProperties.withoutCredentials(preparedProperties));
             driverProperties = new Properties();
             driverProperties.setProperty("user", preparedProperties.getProperty("user"));
             driverProperties.setProperty("password", preparedProperties.getProperty("password"));
@@ -84,7 +84,7 @@ final class SAPHANAJWTDBConnectionController extends UrlDBConnectionController {
         try {
             token = m_tokenAccessor.getAccessToken();
         } catch (IOException ex) {
-            throw new SQLException("Unable to retrieve a JWT access token from the Credentials input.", ex);
+            throw new SQLException("Unable to retrieve a JWT access token from the Credentials input.");
         }
         if (hasProperty(properties, "user")) {
             LOGGER.warn("The JDBC user parameter is overridden by the JWT Credentials input.");
@@ -92,36 +92,13 @@ final class SAPHANAJWTDBConnectionController extends UrlDBConnectionController {
         if (hasProperty(properties, "password")) {
             LOGGER.warn("The JDBC password parameter is overridden by the JWT Credentials input.");
         }
-        applyJwtCredentials(properties, token);
+        JWTJdbcProperties.apply(properties, token);
         monitor.checkCanceled();
         return properties;
-    }
-
-    static void applyJwtCredentials(final Properties properties, final String token) throws SQLException {
-        if (token == null || token.isBlank()) {
-            throw new SQLException("The connected JWT credential did not provide an access token.");
-        }
-        properties.stringPropertyNames().stream().filter(SAPHANAJWTDBConnectionController::isCredentialProperty)
-            .toList().forEach(properties::remove);
-        properties.setProperty("user", "");
-        properties.setProperty("password", token);
-    }
-
-    static Properties copyPropertiesWithoutCredentials(final Properties properties) {
-        final Properties safeProperties = new Properties();
-        safeProperties.putAll(properties);
-        safeProperties.stringPropertyNames().stream()
-            .filter(SAPHANAJWTDBConnectionController::isCredentialProperty)
-            .toList().forEach(safeProperties::remove);
-        return safeProperties;
     }
 
     private static boolean hasProperty(final Properties properties, final String name) {
         return properties.stringPropertyNames().stream()
             .anyMatch(property -> name.equalsIgnoreCase(property));
-    }
-
-    private static boolean isCredentialProperty(final String name) {
-        return "user".equalsIgnoreCase(name) || "password".equalsIgnoreCase(name);
     }
 }
