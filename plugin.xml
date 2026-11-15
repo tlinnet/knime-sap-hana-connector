@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+    <extension point="org.knime.workbench.repository.nodes">
+        <node category-path="/db/connector"
+              deprecated="false"
+              factory-class="org.knime.database.extension.sap.hana.connector.SAPHANADBConnectorNodeFactory">
+        </node>
+    </extension>
+</plugin>

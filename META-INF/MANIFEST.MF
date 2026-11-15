@@ -1,0 +1,17 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: KNIME SAP HANA Connector
+Bundle-SymbolicName: org.knime.sap.hana.connector;singleton:=true
+Bundle-Version: 1.0.0.qualifier
+Bundle-Vendor: KNIME SAP HANA Connector contributors
+Require-Bundle: org.knime.core;bundle-version="[5.12.0,6.0.0)",
+ org.knime.credentials.base;bundle-version="[5.12.0,6.0.0)",
+ org.knime.credentials.base.oauth;bundle-version="[5.12.0,6.0.0)",
+ org.knime.database;bundle-version="[5.12.0,6.0.0)",
+ org.knime.database.nodes;bundle-version="[5.12.0,6.0.0)",
+ org.knime.database.extensions.sap;bundle-version=
+ "[5.12.0,6.0.0)",
+ org.knime.core.ui;bundle-version="[6.0.0,7.0.0)",
+ org.apache.commons.lang3;bundle-version="[3.9.0,4.0.0)"
+Bundle-RequiredExecutionEnvironment: JavaSE-21
+Bundle-ActivationPolicy: lazy

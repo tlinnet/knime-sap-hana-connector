@@ -1,0 +1,11 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Unit Tests for KNIME SAP HANA Connector
+Bundle-SymbolicName: org.knime.sap.hana.connector.tests;singleton:=true
+Bundle-Version: 1.0.0.qualifier
+Bundle-Vendor: KNIME SAP HANA Connector contributors
+Fragment-Host: org.knime.sap.hana.connector;bundle-version=
+ "[1.0.0,2.0.0)"
+Require-Bundle: junit-jupiter-api;bundle-version="[5.10.2,6.0.0)"
+Bundle-RequiredExecutionEnvironment: JavaSE-21
+Bundle-ClassPath: .

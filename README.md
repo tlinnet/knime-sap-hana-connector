@@ -4,9 +4,9 @@ This project develops a Java-based connector node for creating database connecti
 
 ## JWT authentication
 
-When a JWT credential is connected, the connector is intended to pass the encoded token to the SAP HANA JDBC driver's **password** field and leave the **username** blank. This follows SAP's guidance for JWT user authentication. The token should be supplied through KNIME's credential APIs, not entered into or stored in the node's settings.
+When a JWT credential is connected to the optional **Credential (JWT)** input port, the node retrieves its access token through KNIME's credential APIs and passes it to the SAP HANA JDBC driver's **password** property with the **user** property left blank. This takes precedence over the node's configured authentication. The node keeps both properties out of the JDBC URL, including when JDBC parameters are configured to be appended to the URL, and does not persist the token. Without a connected JWT credential, use the configured username/password authentication or no authentication.
 
-This behavior is under development; check the current implementation before relying on JWT support in a KNIME workflow.
+This connector is under development. Validate it against your SAP HANA server and JDBC driver before using it in production workflows.
 
 ## Development
 
@@ -14,6 +14,9 @@ This behavior is under development; check the current implementation before rely
 - Follow the [KNIME SDK setup](https://github.com/knime-oss/knime-sdk-setup) instructions to configure a development environment.
 - Follow KNIME's [guidelines for contributing an extension](https://docs.knime.com/developers/latest/development_contribute_extension/) when developing and preparing the extension.
 - In Eclipse, choose **`KNIME-AP-complete.target`** as the target platform. The complete target includes more KNIME extensions and is the safer fit when developing a database connector. The local KNIME 5.12.0 target definitions are in `reference/knime-sdk-setup-analytics-platform-5.12.0/`.
+- Import this repository's root as the `org.knime.sap.hana.connector` plug-in project and `org.knime.sap.hana.connector.tests/` as its test fragment. The node also requires the SAP HANA database support from the KNIME database extension (the local reference is `reference/knime-database-analytics-platform-5.12.0/org.knime.database.extensions.sap/`).
+- Register the SAP HANA JDBC driver in KNIME's database preferences and select it in the node configuration.
+- Run the focused JWT property tests as a JUnit Plug-in Test from `org.knime.sap.hana.connector.tests/`.
 - Inspect the SAP references below for JWT authentication details.
 
 ## References
