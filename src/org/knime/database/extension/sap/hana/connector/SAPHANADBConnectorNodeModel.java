@@ -54,6 +54,7 @@ final class SAPHANADBConnectorNodeModel
         return switch (settings.m_authentication.getType()) {
             case NONE -> AuthenticationType.NONE;
             case USER_PWD -> AuthenticationType.USER_PWD;
+            case KERBEROS -> AuthenticationType.KERBEROS;
             default -> throw new IllegalArgumentException("Unsupported SAP HANA authentication type.");
         };
     }

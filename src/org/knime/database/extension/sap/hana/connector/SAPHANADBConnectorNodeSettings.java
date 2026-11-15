@@ -116,7 +116,7 @@ public final class SAPHANADBConnectorNodeSettings extends UnauthenticatedServerD
 
     static final class AvailableAuthenticationTypesProvider implements EnumChoicesProvider<AuthenticationType> {
         private static final List<AuthenticationType> TYPES = List.of(AuthenticationType.NONE,
-            AuthenticationType.USER_PWD);
+            AuthenticationType.USER_PWD, AuthenticationType.KERBEROS);
 
         @Override
         public List<AuthenticationType> choices(final NodeParametersInput context) {

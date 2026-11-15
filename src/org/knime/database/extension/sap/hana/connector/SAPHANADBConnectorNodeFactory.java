@@ -32,7 +32,8 @@ public final class SAPHANADBConnectorNodeFactory extends ConfigurableNodeFactory
         .shortDescription("Create a database connection to SAP HANA.")
         .fullDescription("""
                 Creates a connection to a SAP HANA database through its JDBC driver. Configure the server hostname, \
-                port, database name, and authentication. Register and select a SAP HANA JDBC driver in KNIME's \
+                port, database name, and authentication (none, username/password, or Kerberos). Register and select \
+                a SAP HANA JDBC driver in KNIME's \
                 database preferences. A JWT credential can be supplied through the optional input port.
                 """)
         .modelSettingsClass(SAPHANADBConnectorNodeSettings.class)
@@ -43,7 +44,7 @@ public final class SAPHANADBConnectorNodeFactory extends ConfigurableNodeFactory
                 password and the username is left blank; this takes precedence over the configured authentication.
                 """, true)
         .addOutputPort("DB Connection", DBSessionPortObject.TYPE, "SAP HANA DB Connection.")
-        .keywords("database", "db", "connection", "session", "SAP", "HANA", "JWT")
+        .keywords("database", "db", "connection", "session", "SAP", "HANA", "JWT", "Kerberos")
         .build();
 
     @Override
