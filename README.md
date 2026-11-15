@@ -2,6 +2,8 @@
 
 This project develops a Java-based connector node for creating database connections to SAP HANA in KNIME Analytics Platform. The goal is to follow KNIME's database connector conventions and provide an optional **Credentials** input port for JWT-based authentication.
 
+SAP HANA connection URLs use `jdbc:sap://<host>:<port>`.
+
 ## JWT authentication
 
 When a JWT credential is connected to the optional **Credential (JWT)** input port, the node retrieves its access token through KNIME's credential APIs and passes it to the SAP HANA JDBC driver's **password** property with the **user** property left blank. This takes precedence over the node's configured authentication. The node keeps both properties out of the JDBC URL, including when JDBC parameters are configured to be appended to the URL, and does not persist the token. JWT-authenticated connections cannot be restored from saved node internals; re-execute the node to obtain a credential. Without a connected JWT credential, use the configured username/password authentication, Kerberos authentication, or no authentication.
