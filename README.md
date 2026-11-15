@@ -8,6 +8,8 @@ SAP HANA connection URLs use `jdbc:sap://<host>:<port>`.
 
 When a JWT credential is connected to the optional **Credential (JWT)** input port, the node retrieves its access token through KNIME's credential APIs and passes it to the SAP HANA JDBC driver's **password** property with the **user** property left blank. This takes precedence over the node's configured authentication. The node keeps both properties out of the JDBC URL, including when JDBC parameters are configured to be appended to the URL, and does not persist the token. JWT-authenticated connections cannot be restored from saved node internals; re-execute the node to obtain a credential. Without a connected JWT credential, use the configured username/password authentication, Kerberos authentication, or no authentication.
 
+Adding the Credentials input changes the default port from `30015` to `443` in the dialog; removing it changes the default back. Custom ports are retained. The displayed port is used for the connection and can be changed manually, including to `30015` for JWT. Older saved nodes do not record whether `30015` was chosen explicitly, so it will be changed to `443` the first time their dialog is opened with the Credentials input; change it back if needed.
+
 This connector is under development. Validate it against your SAP HANA server and JDBC driver before using it in production workflows.
 
 ## Development
